@@ -10,8 +10,7 @@ from fastapi import FastAPI
 
 app = FastAPI()
 
-
-@app.get("/isClickBait/{title}")
+@app.get("/predict/{title}}")
 async def root(title : str):
     title = [title]
 

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Clickbait Detector</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .container {
+            margin-top: 50px;
+        }
+        .result {
+            margin-top: 20px;
+            font-size: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Clickbait Detector</h1>
+        <form>
+            <div class="form-group">
+                <label for="inputTitle">News Title:</label>
+                <input type="text" class="form-control" id="inputTitle" placeholder="Enter the news title">
+            </div>
+            <button type="button" class="btn btn-primary" onclick="sendRequest()">Check Clickbait</button>
+        </form>
+        <div id="result" class="result"></div>
+    </div>
+
+    <script>
+        function sendRequest() {
+            var input = document.getElementById('inputTitle').value;
+            var url = "10.103.5.104:8000/isClickBait/" + input; //#encodeURIComponent(input);
+            // Replace "http://your-fastapi-endpoint.com/predict" with the actual endpoint of your FastAPI application
+
+            // Send the GET request to the FastAPI endpoint
+            fetch(url)
+                .then(response => response.json())
+                .then(data => {
+                    var resultDiv = document.getElementById('result');
+                    resultDiv.innerHTML = '<strong>Clickbait Prediction:</strong> ' + data.prediction;
+                })
+                .catch(error => console.log(error));
+        }
+    </script>
+</body>
+</html>
